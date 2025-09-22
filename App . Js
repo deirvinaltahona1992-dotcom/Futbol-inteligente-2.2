@@ -1,7 +1,91 @@
-futbol-inteligente/
- ├─ App.js
- ├─ app.json
- ├─ package.json
- ├─ assets/
- │   └─ icon.png   ← (el Einstein cartoon con balón que generamos)
- └─ node_modules/  (se crea al instalar dependencias)
+import React, { useState } from 'react';
+import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+
+export default function App() {
+  const [started, setStarted] = useState(false);
+
+  const jugadores = [
+    { id: 1, x: '20%', y: '70%', color: 'blue' },
+    { id: 2, x: '50%', y: '70%', color: 'blue' },
+    { id: 3, x: '80%', y: '70%', color: 'blue' },
+    { id: 4, x: '30%', y: '50%', color: 'blue' },
+    { id: 5, x: '70%', y: '50%', color: 'blue' },
+    { id: 6, x: '20%', y: '30%', color: 'blue' },
+    { id: 7, x: '50%', y: '30%', color: 'blue' },
+    { id: 8, x: '80%', y: '30%', color: 'blue' },
+    { id: 9, x: '40%', y: '10%', color: 'blue' },
+    { id: 10, x: '60%', y: '10%', color: 'blue' },
+    { id: 11, x: '50%', y: '5%', color: 'blue' },
+  ];
+
+  if (!started) {
+    return (
+      <View style={styles.container}>
+        <Text style={styles.title}>⚽ Fútbol Inteligente</Text>
+        <TouchableOpacity style={styles.button} onPress={() => setStarted(true)}>
+          <Text style={styles.buttonText}>Iniciar</Text>
+        </TouchableOpacity>
+      </View>
+    );
+  }
+
+  return (
+    <View style={styles.field}>
+      {jugadores.map((j) => (
+        <View
+          key={j.id}
+          style={[
+            styles.player,
+            { backgroundColor: j.color, left: j.x, top: j.y },
+          ]}
+        >
+          <Text style={styles.number}>{j.id}</Text>
+        </View>
+      ))}
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: 'green',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  title: {
+    fontSize: 28,
+    color: 'white',
+    marginBottom: 30,
+    fontWeight: 'bold',
+  },
+  button: {
+    backgroundColor: 'white',
+    paddingVertical: 15,
+    paddingHorizontal: 40,
+    borderRadius: 20,
+  },
+  buttonText: {
+    fontSize: 22,
+    color: 'green',
+    fontWeight: 'bold',
+  },
+  field: {
+    flex: 1,
+    backgroundColor: 'green',
+  },
+  player: {
+    position: 'absolute',
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderWidth: 2,
+    borderColor: 'white',
+  },
+  number: {
+    color: 'white',
+    fontWeight: 'bold',
+  },
+});
