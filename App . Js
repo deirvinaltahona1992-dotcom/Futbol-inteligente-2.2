@@ -1,0 +1,7 @@
+futbol-inteligente/
+ ├─ App.js
+ ├─ app.json
+ ├─ package.json
+ ├─ assets/
+ │   └─ icon.png   ← (el Einstein cartoon con balón que generamos)
+ └─ node_modules/  (se crea al instalar dependencias)
